@@ -77,6 +77,10 @@
       </div>
     </div>
 
+    <button class="action watchlist" @click="addToWatchlist">
+      📌 Смотреть позже
+    </button>
+
     <!-- Секция отзывов -->
     <div class="reviews-section">
       <div class="reviews-header">
@@ -144,6 +148,8 @@
       </div>
     </div>
 
+
+
     <!-- Похожие фильмы -->
     <div class="similar-movies" v-if="similarMovies.length > 0">
       <h2>Похожие фильмы</h2>
@@ -180,7 +186,7 @@ const route = useRoute()
 const router = useRouter()
 const movieId = route.params.id
 
-// Состояния
+
 const movie = ref({
   title: "Загрузка...",
   description: "",
@@ -208,7 +214,7 @@ const newReviewRating = ref(0)
 const hasUserRated = ref(false)
 const userRating = ref(null)
 
-// Форматирование чисел
+
 const formatNumber = (num) => {
   if (!num) return '0'
   if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M'
@@ -222,7 +228,7 @@ const formatDate = (timestamp) => {
   return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
-// Отслеживание пользователя
+
 onAuthStateChanged(auth, (currentUser) => {
   user.value = currentUser
   console.log('Пользователь авторизован:', currentUser?.email)
@@ -231,7 +237,7 @@ onAuthStateChanged(auth, (currentUser) => {
   }
 })
 
-// Переключение избранного
+
 const toggleFavorite = async () => {
   if (!user.value) {
     alert('Войдите в аккаунт, чтобы добавить в избранное')
@@ -252,7 +258,7 @@ const toggleFavorite = async () => {
   }
 }
 
-// Проверка, оценил ли пользователь
+
 const checkUserRating = async () => {
   if (!user.value) return
 
@@ -273,7 +279,7 @@ const checkUserRating = async () => {
   }
 }
 
-// Оценить фильм
+
 const submitRating = async () => {
   if (!user.value) {
     alert('Войдите в аккаунт, чтобы оценить фильм')
@@ -314,7 +320,7 @@ const submitRating = async () => {
   }
 }
 
-// Добавить отзыв
+
 const submitReview = async () => {
   if (!user.value) {
     alert('Войдите в аккаунт, чтобы оставить отзыв')
@@ -358,17 +364,17 @@ const submitReview = async () => {
   }
 }
 
-// Загрузка отзывов (без сортировки, если индекс еще не создан)
+
 const loadReviews = async () => {
   loadingReviews.value = true
   try {
     console.log('Загрузка отзывов для фильма:', movieId)
 
-    // Временное решение - без сортировки
+    
     const reviewsQuery = query(
         collection(db, 'reviews'),
         where('movieId', '==', movieId)
-        // orderBy('createdAt', 'desc') // Закомментировано до создания индекса
+        
     )
 
     const snapshot = await getDocs(reviewsQuery)
@@ -379,7 +385,7 @@ const loadReviews = async () => {
       ...doc.data()
     }))
 
-    // Сортируем на клиенте
+    
     reviews.value.sort((a, b) => {
       const dateA = a.createdAt?.toDate?.() || new Date(0)
       const dateB = b.createdAt?.toDate?.() || new Date(0)
@@ -395,7 +401,7 @@ const loadReviews = async () => {
   }
 }
 
-// Лайк отзыва
+
 const likeReview = async (reviewId) => {
   if (!user.value) {
     alert('Войдите в аккаунт')
@@ -417,7 +423,7 @@ const likeReview = async (reviewId) => {
   }
 }
 
-// Удаление отзыва
+
 const deleteReview = async (reviewId) => {
   if (!confirm('Вы уверены, что хотите удалить этот отзыв?')) return
 
@@ -437,7 +443,7 @@ const deleteReview = async (reviewId) => {
   }
 }
 
-// Редактирование отзыва
+
 const editReview = (review) => {
   const newText = prompt('Редактировать отзыв:', review.text)
   if (newText && newText.trim()) {
@@ -455,7 +461,7 @@ const canEditReview = (review) => {
   return user.value && review.userId === user.value.uid
 }
 
-// Загрузка похожих фильмов
+
 const loadSimilarMovies = async () => {
   try {
     const moviesQuery = query(
@@ -481,7 +487,7 @@ const goToMovie = (id) => {
 
 const goBack = () => router.push('/')
 
-// Загрузка данных фильма
+
 onMounted(async () => {
   if (!movieId) return
 

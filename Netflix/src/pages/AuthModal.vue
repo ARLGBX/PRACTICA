@@ -120,7 +120,7 @@ const handleSubmit = async () => {
       userCredential = await signInWithEmailAndPassword(auth, email.value, password.value)
     } else {
       userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value)
-      // Создаем запись в userData при регистрации
+      
       await setDoc(doc(db, 'userData', userCredential.user.uid), {
         email: email.value,
         createdAt: serverTimestamp()
@@ -151,14 +151,14 @@ const handleSubmit = async () => {
     loading.value = false
   }
 
-  // В функции handleSubmit при регистрации:
+  
   if (activeTab.value === 'register') {
     userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value)
-    // Создаем запись в userData при регистрации с ролью user
+    
     await setDoc(doc(db, 'userData', userCredential.user.uid), {
       email: email.value,
       displayName: '',
-      role: 'user',  // ← добавляем роль
+      role: 'user',  
       createdAt: serverTimestamp()
     })
   }
@@ -173,7 +173,7 @@ const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider()
     const userCredential = await signInWithPopup(auth, provider)
 
-    // Создаем запись в userData при входе через Google
+    
     await setDoc(doc(db, 'userData', userCredential.user.uid), {
       email: userCredential.user.email,
       displayName: userCredential.user.displayName,

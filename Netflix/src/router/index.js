@@ -4,8 +4,14 @@ import MovieDetail from '../pages/MovieDetail.vue'
 import Profile from '../pages/Profile.vue'
 import Admin from '../pages/Admin.vue'
 import GenerateReviews from '../pages/GenerateReviews.vue'
+import Watchlist from '../pages/Watchlist.vue'
 
 const routes = [
+    {
+        path: '/watchlist',
+        name: 'Watchlist',
+        component: Watchlist
+    },
     {
         path: '/',
         name: 'Home',
