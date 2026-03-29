@@ -5,3 +5,5 @@ import './firebase/config.js'  // Firebase инициализация
 import './style.css'
 
 createApp(App).use(router).mount('#app')
+
+

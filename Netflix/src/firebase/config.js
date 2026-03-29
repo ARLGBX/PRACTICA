@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
-// Ваша конфигурация Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyAeLYFqxqQYHsiU-COdqLHU92JccNpuy2w",
     authDomain: "netflix-dd25b.firebaseapp.com",
@@ -12,11 +12,8 @@ const firebaseConfig = {
     measurementId: "G-J9HNDC5MT8"
 };
 
-// Инициализация Firebase
 const app = initializeApp(firebaseConfig);
-
-// Инициализация Firestore (база данных)
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-// Экспортируем db для использования в компонентах
-export { db };
+export { db, auth };

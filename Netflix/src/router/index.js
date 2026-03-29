@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
 import MovieDetail from '../pages/MovieDetail.vue'
+import Profile from '../pages/Profile.vue'
+import Admin from '../pages/Admin.vue'
+import GenerateReviews from '../pages/GenerateReviews.vue'
 
 const routes = [
     {
@@ -13,6 +16,21 @@ const routes = [
         name: 'MovieDetail',
         component: MovieDetail,
         props: true
+    },
+    {
+        path: '/profile',
+        name: 'Profile',
+        component: Profile
+    },
+    {
+        path: '/admin',
+        name: 'Admin',
+        component: Admin
+    },
+    {
+        path: '/generate-reviews',
+        name: 'GenerateReviews',
+        component: GenerateReviews
     }
 ]
 
