@@ -170,4 +170,27 @@ const logout = async () => {
     margin-right: 15px;
   }
 }
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .nav-left {
+    gap: 15px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    margin-right: 10px;
+  }
+}
 </style>

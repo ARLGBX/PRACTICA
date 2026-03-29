@@ -1063,4 +1063,53 @@ onMounted(async () => {
     align-items: stretch;
   }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 12px;
+  }
+
+  .back-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .info h1 {
+    font-size: 22px;
+  }
+
+  .rating {
+    font-size: 18px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .trailer-frame {
+    height: 200px;
+  }
+
+  .similar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .similar-poster {
+    height: 200px;
+  }
+
+  .rating-select {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .rating-star {
+    font-size: 22px;
+  }
+
+  .reviews-header h2 {
+    font-size: 22px;
+  }
+}
 </style>
