@@ -69,3 +69,223 @@ const clearAll = async () => {
   await loadWatchlist()
 }
 </script>
+
+<style scoped>
+.watchlist {
+  min-height: 100vh;
+  background: #141414;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: #111;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.watchlist-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 50px;
+}
+
+.watchlist-container h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: #aaa;
+}
+
+.empty p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 25px;
+  background: #e50914;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background: #b20710;
+}
+
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.watchlist-card {
+  display: flex;
+  background: #1c1c1c;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.watchlist-card:hover {
+  transform: scale(1.02);
+}
+
+.card-poster {
+  width: 100px;
+  height: 140px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.card-info h3 {
+  font-size: 16px;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.card-meta {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-watch {
+  padding: 7px 14px;
+  background: #e50914;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-watch:hover {
+  background: #b20710;
+}
+
+.btn-remove {
+  padding: 7px 14px;
+  background: #333;
+  color: #aaa;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s;
+}
+
+.btn-remove:hover {
+  background: #555;
+  color: white;
+}
+
+.watchlist-actions {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.btn-clear {
+  padding: 10px 22px;
+  background: transparent;
+  color: #aaa;
+  border: 1px solid #555;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.btn-clear:hover {
+  background: #333;
+  color: white;
+  border-color: #e50914;
+}
+
+@media (max-width: 768px) {
+  .watchlist-container {
+    padding: 25px 20px;
+  }
+
+  .watchlist-container h1 {
+    font-size: 24px;
+  }
+
+  .watchlist-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .watchlist-actions {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .watchlist-container {
+    padding: 15px;
+  }
+
+  .watchlist-container h1 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .card-poster {
+    width: 80px;
+    height: 115px;
+  }
+
+  .card-info {
+    padding: 10px;
+  }
+
+  .card-info h3 {
+    font-size: 14px;
+  }
+
+  .card-actions {
+    gap: 6px;
+  }
+
+  .btn-watch,
+  .btn-remove {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+</style>

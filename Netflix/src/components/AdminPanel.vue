@@ -1168,4 +1168,42 @@ textarea.form-input {
     max-width: 150px;
   }
 }
+
+@media (max-width: 480px) {
+  .admin-content {
+    padding: 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .stat-value {
+    font-size: 26px;
+  }
+
+  .dashboard h1,
+  .section-header h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  table {
+    font-size: 11px;
+  }
+
+  th, td {
+    padding: 6px 3px;
+  }
+
+  .table-poster {
+    width: 36px;
+    height: 50px;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+}
 </style>

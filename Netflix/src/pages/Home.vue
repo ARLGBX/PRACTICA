@@ -1153,6 +1153,7 @@ onMounted(() => {
     flex-direction: column;
     align-items: stretch;
     padding: 15px 20px;
+    gap: 10px;
   }
 
   .nav-left {
@@ -1161,10 +1162,8 @@ onMounted(() => {
 
   .nav-right {
     flex-direction: column;
-  }
-
-  .search, .filter-btn, .sort-select {
     width: 100%;
+    gap: 10px;
   }
 
   .search-container {
@@ -1173,10 +1172,21 @@ onMounted(() => {
 
   .search {
     width: 100%;
+    box-sizing: border-box;
   }
 
   .filter-sort-container {
     flex-direction: column;
+    width: 100%;
+  }
+
+  .filter-btn, .sort-select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .carousel-container {
+    padding: 0 20px 30px;
   }
 
   .carousel-slide {
@@ -1189,17 +1199,18 @@ onMounted(() => {
   }
 
   .filters-panel {
-    margin: 20px;
+    margin: 15px;
   }
 
   .results-header {
     flex-direction: column;
     align-items: flex-start;
-    padding: 20px;
+    padding: 15px 20px;
+    gap: 10px;
   }
 
   .movies-grid-section {
-    padding: 20px;
+    padding: 15px 20px 30px;
   }
 
   .movies-grid {
@@ -1209,16 +1220,48 @@ onMounted(() => {
 }
 
 @media (max-width: 480px) {
+  .logo {
+    font-size: 24px;
+  }
+
+  .carousel-container {
+    padding: 0 12px 20px;
+  }
+
   .carousel-slide {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 
   .card {
-    height: 320px;
+    height: 300px;
+  }
+
+  .card-info h3 {
+    font-size: 14px;
+  }
+
+  .filters-panel {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .results-header {
+    padding: 10px 15px;
+  }
+
+  .movies-grid-section {
+    padding: 10px 15px 25px;
   }
 
   .movies-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 }
 </style>
