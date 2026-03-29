@@ -315,7 +315,7 @@ const navItems = [
   { id: 'logs', name: 'Логи', icon: '📝' }
 ]
 
-// Статистика
+
 const stats = ref({
   totalMovies: 0,
   totalUsers: 0,
@@ -325,7 +325,7 @@ const stats = ref({
 
 const recentActivities = ref([])
 
-// Фильмы
+
 const movies = ref([])
 const movieSearch = ref('')
 const showMovieModal = ref(false)
@@ -343,18 +343,18 @@ const movieForm = ref({
   description: ''
 })
 
-// Пользователи
+
 const users = ref([])
 const userSearch = ref('')
 
-// Отзывы
+
 const reviews = ref([])
 const reviewSearch = ref('')
 
-// Логи
+
 const logs = ref([])
 
-// Форматирование чисел
+
 const formatNumber = (num) => {
   if (!num) return '0'
   if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M'
@@ -404,7 +404,7 @@ const getActivityIcon = (action) => {
   return icons[action] || '📌'
 }
 
-// Загрузка статистики
+
 const loadStats = async () => {
   try {
     const moviesSnap = await getDocs(collection(db, 'movies'))
@@ -423,7 +423,7 @@ const loadStats = async () => {
   }
 }
 
-// Загрузка последней активности
+
 const loadRecentActivity = async () => {
   try {
     const logsQuery = query(
@@ -441,7 +441,7 @@ const loadRecentActivity = async () => {
   }
 }
 
-// Загрузка фильмов
+
 const loadMovies = async () => {
   try {
     const snapshot = await getDocs(collection(db, 'movies'))
@@ -454,7 +454,7 @@ const loadMovies = async () => {
   }
 }
 
-// Загрузка пользователей с их статистикой
+
 const loadUsers = async () => {
   try {
     const usersSnap = await getDocs(collection(db, 'userData'))
@@ -486,7 +486,7 @@ const loadUsers = async () => {
   }
 }
 
-// Загрузка отзывов
+
 const loadReviews = async () => {
   try {
     const reviewsQuery = query(
@@ -503,7 +503,7 @@ const loadReviews = async () => {
   }
 }
 
-// Загрузка логов
+
 const loadLogs = async () => {
   try {
     const logsQuery = query(
@@ -521,7 +521,7 @@ const loadLogs = async () => {
   }
 }
 
-// Сохранение лога
+
 const addLog = async (action, details) => {
   try {
     await addDoc(collection(db, 'adminLogs'), {
@@ -536,7 +536,7 @@ const addLog = async (action, details) => {
   }
 }
 
-// Добавление/редактирование фильма
+
 const openMovieModal = (movie = null) => {
   if (movie) {
     editingMovie.value = movie
@@ -599,7 +599,7 @@ const saveMovie = async () => {
   }
 }
 
-// Удаление фильма
+
 const deleteMovie = async (movieId) => {
   if (!confirm('Вы уверены, что хотите удалить этот фильм? Это также удалит все отзывы к нему.')) return
 
@@ -627,7 +627,7 @@ const deleteMovie = async (movieId) => {
   }
 }
 
-// Обновление роли пользователя
+
 const updateUserRole = async (user) => {
   try {
     await updateDoc(doc(db, 'userData', user.uid), {
@@ -641,7 +641,7 @@ const updateUserRole = async (user) => {
   }
 }
 
-// Удаление пользователя
+
 const deleteUser = async (userId) => {
   if (!confirm('Вы уверены, что хотите удалить этого пользователя? Все его отзывы также будут удалены.')) return
 
@@ -678,7 +678,7 @@ const deleteUser = async (userId) => {
   }
 }
 
-// Удаление отзыва
+
 const deleteReview = async (reviewId) => {
   if (!confirm('Вы уверены, что хотите удалить этот отзыв?')) return
 
@@ -706,7 +706,7 @@ const deleteReview = async (reviewId) => {
   }
 }
 
-// Проверка прав администратора
+
 onMounted(async () => {
   onAuthStateChanged(auth, async (user) => {
     currentUser.value = user

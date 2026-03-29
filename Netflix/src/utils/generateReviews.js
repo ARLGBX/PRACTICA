@@ -1,7 +1,7 @@
 import { collection, addDoc, getDocs, doc, updateDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase/config'
 
-// Список имен пользователей для отзывов
+
 const users = [
     { name: 'Алексей', avatar: 'A' },
     { name: 'Мария', avatar: 'M' },
@@ -15,7 +15,7 @@ const users = [
     { name: 'Наталья', avatar: 'N' }
 ]
 
-// Шаблоны отзывов
+
 const reviewTemplates = [
     { text: 'Шедевр! Фильм заставляет задуматься о жизни. Очень глубокая история с отличной игрой актеров.', rating: 9 },
     { text: 'Отличный фильм! Сюжет держит в напряжении до самого конца. Рекомендую к просмотру!', rating: 8 },
@@ -34,7 +34,7 @@ const reviewTemplates = [
     { text: 'Очень трогательная история. Фильм заставил плакать и смеяться одновременно.', rating: 9 }
 ]
 
-// Уникальные фразы для разнообразия
+
 const uniquePhrases = [
     'Особенно понравилась музыка в фильме!',
     'Визуальные эффекты просто завораживают.',
@@ -48,24 +48,24 @@ const uniquePhrases = [
     'Смотреть в оригинале с субтитрами - отдельное удовольствие.'
 ]
 
-// Функция для получения случайного элемента из массива
+
 const randomItem = (arr) => arr[Math.floor(Math.random() * arr.length)]
 
-// Функция для получения случайного числа в диапазоне
+
 const randomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
-// Функция для генерации случайного отзыва
+
 const generateRandomReview = (movieTitle, userId = null) => {
     const template = randomItem(reviewTemplates)
     const user = randomItem(users)
     const phrase = randomItem(uniquePhrases)
 
-    // Добавляем уникальную фразу к отзыву с вероятностью 70%
+    
     const finalText = Math.random() > 0.3
         ? `${template.text} ${phrase}`
         : template.text
 
-    // Иногда добавляем упоминание фильма
+    
     const withMovieName = Math.random() > 0.5
         ? finalText
         : `${finalText} "${movieTitle}" - действительно стоящая вещь!`
@@ -76,18 +76,18 @@ const generateRandomReview = (movieTitle, userId = null) => {
         text: withMovieName,
         rating: template.rating,
         likes: randomNumber(0, 45),
-        createdAt: new Date(Date.now() - randomNumber(1, 90) * 24 * 60 * 60 * 1000), // от 1 до 90 дней назад
+        createdAt: new Date(Date.now() - randomNumber(1, 90) * 24 * 60 * 60 * 1000), 
         userId: userId || `user_${user.name.toLowerCase()}_${Date.now()}`
     }
 }
 
-// Функция для генерации 5-10 уникальных отзывов для фильма
+
 export const generateReviewsForMovie = async (movieId, movieTitle) => {
     const reviewsCount = randomNumber(5, 10)
     const generatedReviews = []
 
     for (let i = 0; i < reviewsCount; i++) {
-        // Каждый отзыв уникален
+        
         const review = generateRandomReview(movieTitle, `demo_user_${i + 1}`)
         generatedReviews.push(review)
 
@@ -108,7 +108,7 @@ export const generateReviewsForMovie = async (movieId, movieTitle) => {
         }
     }
 
-    // Обновляем счетчик комментариев в фильме
+    
     try {
         const movieRef = doc(db, 'movies', movieId)
         await updateDoc(movieRef, {
@@ -122,7 +122,7 @@ export const generateReviewsForMovie = async (movieId, movieTitle) => {
     return generatedReviews
 }
 
-// Функция для генерации отзывов для всех фильмов
+
 export const generateReviewsForAllMovies = async () => {
     try {
         const moviesSnapshot = await getDocs(collection(db, 'movies'))

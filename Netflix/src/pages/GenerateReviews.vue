@@ -57,7 +57,7 @@ const progress = ref(0)
 const progressMessage = ref('')
 const result = ref('')
 
-// Список имен пользователей для отзывов
+
 const users = [
   { name: 'Алексей', avatar: 'A' },
   { name: 'Мария', avatar: 'M' },
@@ -75,7 +75,7 @@ const users = [
   { name: 'Елена', avatar: 'E' }
 ]
 
-// Шаблоны отзывов
+
 const reviewTemplates = [
   { text: 'Шедевр! Фильм заставляет задуматься о жизни. Очень глубокая история с отличной игрой актеров.', rating: 9 },
   { text: 'Отличный фильм! Сюжет держит в напряжении до самого конца. Рекомендую к просмотру!', rating: 8 },
@@ -94,7 +94,7 @@ const reviewTemplates = [
   { text: 'Очень трогательная история. Фильм заставил плакать и смеяться одновременно.', rating: 9 }
 ]
 
-// Уникальные фразы для разнообразия
+
 const uniquePhrases = [
   'Особенно понравилась музыка в фильме!',
   'Визуальные эффекты просто завораживают.',
@@ -436,6 +436,6 @@ h1 {
 </style>
 
 <script>
-// Добавляем импорт addDoc
+
 import { addDoc } from 'firebase/firestore'
 </script>

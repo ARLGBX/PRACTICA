@@ -207,7 +207,7 @@ import AuthModal from '../pages/AuthModal.vue'
 
 const router = useRouter()
 
-// Состояния
+
 const movies = ref([])
 const searchQuery = ref('')
 const loading = ref(true)
@@ -222,10 +222,10 @@ const currentPage = ref(1)
 const ITEMS_PER_PAGE = 12
 const ITEMS_PER_SLIDE = 5
 
-// Список жанров
+
 const genres = ['Боевик', 'Комедия', 'Драма', 'Фантастика', 'Ужасы', 'Триллер', 'Мелодрама', 'Документальный']
 
-// Параметры фильтрации
+
 const filters = ref({
   genre: '',
   yearFrom: '',
@@ -235,10 +235,10 @@ const filters = ref({
   ageRating: ''
 })
 
-// Сортировка
+
 const sortBy = ref('rating_desc')
 
-// Функции сортировки
+
 const sortMovies = (moviesList) => {
   const sorted = [...moviesList]
   switch (sortBy.value) {
@@ -261,16 +261,16 @@ const sortMovies = (moviesList) => {
   }
 }
 
-// Фильтрация фильмов
+
 const filteredMovies = computed(() => {
   let result = movies.value
 
-  // Фильтр по избранному
+  
   if (showFavoritesOnly.value) {
     result = result.filter(movie => movie.isFavorite)
   }
 
-  // Фильтр по поиску
+  
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase()
     result = result.filter(movie =>
@@ -279,12 +279,12 @@ const filteredMovies = computed(() => {
     )
   }
 
-  // Фильтр по жанру
+  
   if (filters.value.genre) {
     result = result.filter(movie => movie.genre === filters.value.genre)
   }
 
-  // Фильтр по году
+  
   if (filters.value.yearFrom) {
     result = result.filter(movie => (movie.year || 0) >= parseInt(filters.value.yearFrom))
   }
@@ -292,12 +292,12 @@ const filteredMovies = computed(() => {
     result = result.filter(movie => (movie.year || 0) <= parseInt(filters.value.yearTo))
   }
 
-  // Фильтр по рейтингу
+  
   if (filters.value.ratingMin > 0) {
     result = result.filter(movie => (movie.rating || 0) >= filters.value.ratingMin)
   }
 
-  // Фильтр по длительности
+  
   if (filters.value.durationMax) {
     result = result.filter(movie => {
       const duration = parseInt(movie.duration)
@@ -305,16 +305,16 @@ const filteredMovies = computed(() => {
     })
   }
 
-  // Фильтр по возрастному рейтингу
+  
   if (filters.value.ageRating) {
     result = result.filter(movie => parseInt(movie.ageRating) >= parseInt(filters.value.ageRating))
   }
 
-  // Сортировка
+  
   return sortMovies(result)
 })
 
-// Пагинация для сетки
+
 const totalPages = computed(() => {
   return Math.ceil(filteredMovies.value.length / ITEMS_PER_PAGE)
 })
@@ -325,7 +325,7 @@ const paginatedMovies = computed(() => {
   return filteredMovies.value.slice(start, end)
 })
 
-// Слайды для карусели (первые 20 фильмов)
+
 const carouselMovies = computed(() => {
   return filteredMovies.value.slice(0, 20)
 })
@@ -340,7 +340,7 @@ const movieSlides = computed(() => {
 
 const totalSlides = computed(() => movieSlides.value.length)
 
-// Управление каруселью
+
 const nextSlide = () => {
   if (currentSlide.value < totalSlides.value - 1) {
     currentSlide.value++
@@ -357,7 +357,7 @@ const goToSlide = (index) => {
   currentSlide.value = index
 }
 
-// Сброс фильтров
+
 const resetFilters = () => {
   searchQuery.value = ''
   showFavoritesOnly.value = false
@@ -374,7 +374,7 @@ const resetFilters = () => {
   currentSlide.value = 0
 }
 
-// Обработчики
+
 const handleSearch = () => {
   currentPage.value = 1
   currentSlide.value = 0
@@ -389,7 +389,7 @@ const clearSearch = () => {
   handleSearch()
 }
 
-// Проверка на админа
+
 const checkAdminStatus = async () => {
   if (user.value) {
     try {
@@ -402,7 +402,7 @@ const checkAdminStatus = async () => {
   }
 }
 
-// Реальное время - подписка на изменения фильмов
+
 let unsubscribeMovies = null
 
 const subscribeToMovies = () => {
@@ -439,7 +439,7 @@ const subscribeToMovies = () => {
   })
 }
 
-// Загрузка избранного
+
 const loadUserFavorites = async () => {
   if (!user.value) return
 
@@ -459,7 +459,7 @@ const loadUserFavorites = async () => {
   }
 }
 
-// Переключение избранного
+
 const toggleFavorite = async (movie) => {
   if (!user.value) {
     showAuthModal.value = true
@@ -494,7 +494,7 @@ const toggleFavorite = async (movie) => {
   }
 }
 
-// Выход
+
 const logout = async () => {
   try {
     await signOut(auth)
@@ -505,12 +505,12 @@ const logout = async () => {
   }
 }
 
-// Переход на страницу фильма
+
 const goToMovie = (id) => {
   router.push(`/movie/${id}`)
 }
 
-// Форматирование чисел
+
 const formatNumber = (num) => {
   if (!num) return '0'
   if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M'
@@ -518,14 +518,14 @@ const formatNumber = (num) => {
   return num.toString()
 }
 
-// Успешная авторизация
+
 const onAuthSuccess = () => {
   if (user.value) {
     loadUserFavorites()
   }
 }
 
-// Отслеживание пользователя
+
 onAuthStateChanged(auth, (currentUser) => {
   user.value = currentUser
   checkAdminStatus()
@@ -539,13 +539,13 @@ onAuthStateChanged(auth, (currentUser) => {
   }
 })
 
-// Сброс страницы при изменении фильтров
+
 watch([filteredMovies, showFavoritesOnly, searchQuery, filters, sortBy], () => {
   currentPage.value = 1
   currentSlide.value = 0
 })
 
-// Инициализация
+
 onMounted(() => {
   subscribeToMovies()
 })
